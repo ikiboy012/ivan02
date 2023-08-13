@@ -26,7 +26,7 @@ export default function Page() {
 
   function deleteTodoItem(id: string) {
 
-  
+
 
 
 
@@ -35,36 +35,6 @@ export default function Page() {
         return todoItem.id !== id;
       })
     })
-  }
-
-  function AlertBox(){
-    /* return (<AlertDialog.Root>
-      <AlertDialog.Trigger>
-        <Button color="red">Revoke access</Button>
-      </AlertDialog.Trigger>
-      <AlertDialog.Content style={{ maxWidth: 450 }}>
-        <AlertDialog.Title>Revoke access</AlertDialog.Title>
-        <AlertDialog.Description size="2">
-          Are you sure? This application will no longer be accessible and any
-          existing sessions will be expired.
-        </AlertDialog.Description>
-
-        <Flex gap="3" mt="4" justify="end">
-          <AlertDialog.Cancel>
-            <Button variant="soft" color="gray">
-              Cancel
-            </Button>
-          </AlertDialog.Cancel>
-          <AlertDialog.Action>
-            <Button variant="solid" color="red">
-              Revoke access
-            </Button>
-          </AlertDialog.Action>
-        </Flex>
-      </AlertDialog.Content>
-    </AlertDialog.Root>) */
-    return(<button>KLik</button>)
-
   }
 
 
@@ -87,9 +57,38 @@ export default function Page() {
                   <Table.Cell>{value.id}</Table.Cell>
                   <Table.Cell>{value.text}</Table.Cell>
                   <Table.Cell>
-                    <IconButton color="red" variant="ghost" radius="full" onClick={()=>{return alertBox()}}>
+
+                    <AlertDialog.Root>
+                      <AlertDialog.Trigger>
+                      <IconButton color="red" variant="ghost" radius="full">
                       <TrashIcon width="18" height="18" />
                     </IconButton>
+                      </AlertDialog.Trigger>
+                      <AlertDialog.Content style={{ maxWidth: 450 }}>
+                        <AlertDialog.Title>Delete item</AlertDialog.Title>
+                        <AlertDialog.Description size="2">
+                          Are you sure? This action will delete item <strong>{value.text}</strong> from list
+                        </AlertDialog.Description>
+
+                        <Flex gap="3" mt="4" justify="end">
+                          <AlertDialog.Cancel>
+                            <Button variant="soft" color="gray">
+                              Cancel
+                            </Button>
+                          </AlertDialog.Cancel>
+                          <AlertDialog.Action>
+                            <Button variant="solid" color="red"  onClick={()=>{deleteTodoItem(value.id)}}>
+                              Delete
+                            </Button>
+                          </AlertDialog.Action>
+                        </Flex>
+                      </AlertDialog.Content>
+                    </AlertDialog.Root>
+
+                    {/* <IconButton color="red" variant="ghost" radius="full" onClick={()=>{return alertBox()}}>
+                      <TrashIcon width="18" height="18" />
+                    </IconButton> */}
+
                   </Table.Cell>
                 </Table.Row>
               )
@@ -110,9 +109,9 @@ export default function Page() {
       >
         Add
       </Button>
-      {todoList.length > 0 ? (<AlertBox/>):null}
 
-      
+
+
     </Flex>
   )
 }
